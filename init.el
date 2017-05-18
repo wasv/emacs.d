@@ -21,11 +21,15 @@
 			 evil
 			 flycheck
 			 helm
+			 magit
+			 auto-complete
+			 diff-hl
 
 			 org-bullets
 
 			 evil-org
 			 evil-leader
+
 			 ))
 
 ;;; evil
@@ -36,11 +40,19 @@
 (evil-leader/set-key
   "ff" 'find-file
   "bs" 'switch-to-buffer
+  "bn" 'next-buffer
+  "b" 'previous-buffer
   "bk" 'kill-buffer)
 
 ;;; Helm
 (require 'helm-config)
 (global-set-key (kbd "M-x") 'helm-M-x)
+
+;;; Autocomplete
+(ac-config-default)
+
+;;; diff-hl
+(diff-hl-mode 1)
 
 ;;; esc quits
 (defun minibuffer-keyboard-quit ()
@@ -63,6 +75,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 ;;; Hooks
 (add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+
 
 ;;; Autoconfig Stuff
 (custom-set-variables
