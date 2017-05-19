@@ -7,7 +7,6 @@
   (menu-bar-mode -1))
 
 ;;; Packages
-(server-start)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
 			 ("org" . "http://orgmode.org/elpa/")
 			 ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -40,7 +39,7 @@
 	 evil-org
 	 evil-leader
 
-	 guess-offset
+	 dtrt-indent
 	 smart-tabs-mode
 ))
 
@@ -88,6 +87,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;;; Hooks
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+(add-hook 'c-mode-common-hook
+  (lambda()
+    (require 'dtrt-indent)
+    (dtrt-indent-mode t)))
 
 ;;; Autoconfig Stuff
 (custom-set-variables
