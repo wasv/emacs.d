@@ -1,12 +1,17 @@
 ;;; init.el --- Initial emacs config.
 ;;; Commentary:
 ;;; Code:
+
+;;; Disable menubar in console
+(when (not (display-graphic-p))
+  (menu-bar-mode -1))
+
 ;;; Packages
 (server-start)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("org" . "http://orgmode.org/elpa/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
+			 ("org" . "http://orgmode.org/elpa/")
+			 ("marmalade" . "http://marmalade-repo.org/packages/")
+			 ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
 (package-initialize)
 
 (defun require-package (package)
@@ -18,21 +23,26 @@
     (package-install package)))
 
 ;;; Package List
-(mapc 'require-package '(org
-			 evil
-			 flycheck
-			 helm
-			 magit
-			 auto-complete
-			 diff-hl
-			 markdown-mode
+(mapc 'require-package '(
+	 org
+	 evil
+	 flycheck
+	 helm
+	 magit
+	 auto-complete
+	 diff-hl
 
-			 org-bullets
+	 markdown-mode
+	 python-mode
 
-			 evil-org
-			 evil-leader
+	 org-bullets
 
-			 ))
+	 evil-org
+	 evil-leader
+
+	 guess-offset
+	 smart-tabs-mode
+))
 
 ;;; evil
 (require 'evil)
@@ -78,10 +88,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;;; Hooks
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-
-;;; Disable menubar in console
-(when (not (display-graphic-p))
-  (menu-bar-mode -1))
 
 ;;; Autoconfig Stuff
 (custom-set-variables
