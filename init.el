@@ -1,7 +1,8 @@
 ;;; init.el --- Initial emacs config.
 ;;; Commentary:
 ;;; Code:
-;;; packages
+;;; Packages
+(server-start)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("org" . "http://orgmode.org/elpa/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -24,6 +25,7 @@
 			 magit
 			 auto-complete
 			 diff-hl
+			 markdown-mode
 
 			 org-bullets
 
@@ -41,7 +43,7 @@
   "ff" 'find-file
   "bs" 'switch-to-buffer
   "bn" 'next-buffer
-  "b" 'previous-buffer
+  "bp" 'previous-buffer
   "bk" 'kill-buffer)
 
 ;;; Helm
@@ -77,6 +79,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
+;;; Disable menubar in console
+(when (not (display-graphic-p))
+  (menu-bar-mode -1))
 
 ;;; Autoconfig Stuff
 (custom-set-variables
