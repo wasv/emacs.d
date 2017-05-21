@@ -45,6 +45,7 @@
 
 ;;; evil
 (require 'evil)
+(require 'evil-leader)
 (evil-mode 1)
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
