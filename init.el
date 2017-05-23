@@ -66,6 +66,12 @@
 ;;; diff-hl
 (diff-hl-mode 1)
 
+;; org
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
 ;;; esc quits
 (defun minibuffer-keyboard-quit ()
   "Abort recursive edit.
