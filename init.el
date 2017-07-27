@@ -66,11 +66,16 @@
 ;;; diff-hl
 (diff-hl-mode 1)
 
-;; org
+;;; org
 (require 'org)
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
+
+;;; recentf
+(require 'recentf)
+(setq recentf-auto-cleanup 'never) ;; disable before we start recentf!
+(recentf-mode 1)
 
 ;;; esc quits
 (defun minibuffer-keyboard-quit ()
