@@ -10,7 +10,7 @@
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
 			 ("org" . "http://orgmode.org/elpa/")
 			 ("marmalade" . "http://marmalade-repo.org/packages/")
-			 ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
+			 ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
 (defun require-package (package)
@@ -33,6 +33,7 @@
 
 	 markdown-mode
 	 python-mode
+	 racket-mode
 
 	 org-bullets
 
@@ -44,6 +45,7 @@
 ))
 
 ;;; evil
+(substitute-key-definition 'kill-buffer 'kill-buffer-and-its-windows global-map)
 (require 'evil)
 (require 'evil-leader)
 (evil-mode 1)
@@ -97,8 +99,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 
 ;;; Hooks
-(add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'after-init-hook 'global-flycheck-mode)
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'c-mode-common-hook
   (lambda()
     (require 'dtrt-indent)
