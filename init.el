@@ -53,6 +53,7 @@
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
   "ff" 'find-file
+  "fr" 'helm-recentf
   "bs" 'switch-to-buffer
   "bn" 'next-buffer
   "bp" 'previous-buffer
