@@ -98,6 +98,24 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
+;;; Custom functions
+(defun pandoc-blank-to-pdf (from-fmt)
+  "Convert the current buffer from FROM-FMT to a pdf using Pandoc."
+  (interactive)
+  (shell-command-on-region
+   (point-min) (point-max)
+   (format "pandoc -f %s -o %s.pdf" from-fmt (buffer-name))
+   ))
+
+(defun pandoc-org-to-pdf ()
+  "Convert the current buffer from org to a pdf using Pandoc."
+  (interactive)
+  (pandoc-blank-to-pdf "org"))
+
+(defun pandoc-md-to-pdf ()
+  "Convert the current buffer from md to a pdf using Pandoc."
+  (interactive)
+  (pandoc-blank-to-pdf "markdown"))
 
 ;;; Hooks
 (add-hook 'after-init-hook 'global-flycheck-mode)
