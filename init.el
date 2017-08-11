@@ -98,24 +98,42 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
-;;; Custom functions
-(defun pandoc-blank-to-pdf (from-fmt)
-  "Convert the current buffer from FROM-FMT to a pdf using Pandoc."
+;;; Custom Pandoc functions
+(defun pandoc-blank-to-blank (from-fmt to-fmt out-name)
+  "Convert the current buffer from FROM-FMT to TO-FMT using Pandoc.  Output is saved in a file called OUT-NAME."
   (interactive)
   (shell-command-on-region
    (point-min) (point-max)
-   (format "pandoc -f %s -o %s.pdf" from-fmt (buffer-name))
+   (format "pandoc -f %s -t %s -o %s" from-fmt to-fmt out-name)
+   ))
+
+(defun pandoc-blank-to-pdf (from-fmt out-name)
+  "Convert the current buffer from FROM-FMT to pdf using Pandoc.  Output is saved in a file called OUT-NAME."
+  (interactive)
+  (shell-command-on-region
+   (point-min) (point-max)
+   (format "pandoc -f %s -o %s" from-fmt out-name)
    ))
 
 (defun pandoc-org-to-pdf ()
   "Convert the current buffer from org to a pdf using Pandoc."
   (interactive)
-  (pandoc-blank-to-pdf "org"))
+  (pandoc-blank-to-pdf "org" (concat buffer-file-name ".pdf")))
 
 (defun pandoc-md-to-pdf ()
   "Convert the current buffer from md to a pdf using Pandoc."
   (interactive)
-  (pandoc-blank-to-pdf "markdown"))
+  (pandoc-blank-to-pdf "markdown" (concat buffer-file-name ".pdf")))
+
+(defun pandoc-tex-to-pdf ()
+  "Convert the current buffer from tex to a pdf using Pandoc."
+  (interactive)
+  (pandoc-blank-to-pdf "latex" (concat buffer-file-name ".pdf")))
+
+(defun pandoc-md-to-tex ()
+  "Convert the current buffer from md to tex using Pandoc."
+  (interactive)
+  (pandoc-blank-to-blank "markdown" "latex" (concat buffer-file-name ".tex")))
 
 ;;; Hooks
 (add-hook 'after-init-hook 'global-flycheck-mode)
