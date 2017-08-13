@@ -23,26 +23,27 @@
 
 ;;; Package List
 (mapc 'require-package '(
-	 org
-	 evil
-	 flycheck
-	 helm
-	 magit
-	 auto-complete
-	 diff-hl
+  org
+  evil
+  flycheck
+  helm
+  magit
+  auto-complete
+  diff-hl
 
-	 markdown-mode
-	 python-mode
-	 racket-mode
+  markdown-mode
+  python-mode
+  racket-mode
 
-	 org-bullets
+  org-bullets
 
-	 evil-org
-	 evil-leader
+  evil-org
+  evil-leader
 
-	 dtrt-indent
-	 smart-tabs-mode
-))
+  dtrt-indent
+  smart-tabs-mode
+  csv-mode
+  ))
 
 ;;; evil
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-its-windows global-map)
@@ -138,11 +139,14 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;;; Hooks
 (add-hook 'after-init-hook 'global-flycheck-mode)
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'text-mode-hook (lambda()
+			    (setq-default indent-tabs-mode nil)
+			    (setq-default tab-width 4)
+			    (setq indent-line-function 'insert-tab)))
 (add-hook 'c-mode-common-hook
-  (lambda()
-    (require 'dtrt-indent)
-    (dtrt-indent-mode t)))
+	  (lambda()
+	    (require 'dtrt-indent)
+	    (dtrt-indent-mode t)))
 
 ;;; Autoconfig Stuff
 (custom-set-variables
