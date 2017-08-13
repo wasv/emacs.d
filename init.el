@@ -55,10 +55,18 @@
 (evil-leader/set-key
   "ff" 'find-file
   "fr" 'helm-recentf
+
   "bs" 'switch-to-buffer
   "bn" 'next-buffer
   "bp" 'previous-buffer
-  "bk" 'kill-buffer)
+  "bk" 'kill-buffer
+
+  "ww" 'evil-window-next
+  "wv" 'split-window-vertically
+  "wh" 'split-window-horizontally
+  "ws" 'split-window-horizontally
+  "wk" 'delete-window
+  )
 
 ;;; Helm
 (require 'helm-config)
