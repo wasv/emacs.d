@@ -167,7 +167,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(org-agenda-files (quote ("~/Dropbox/Schedule")))
  '(org-agenda-regexp-filter (quote ("~/Dropbox/Schedule/*.org")) t)
  '(org-agenda-start-on-weekday 0)
- '(org-todo-keywords (quote ((sequence "TODO" "STRT" "DONE")))))
+ '(org-todo-keywords (quote ((sequence "TODO" "STRT" "DONE"))))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
