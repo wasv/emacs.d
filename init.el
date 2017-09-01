@@ -47,10 +47,13 @@
 
 ;;; evil
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-its-windows global-map)
+(setq evil-want-C-i-jump nil)
 (require 'evil)
 (require 'evil-leader)
 (evil-mode 1)
 (global-evil-leader-mode)
+(when evil-want-C-i-jump
+      define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward)
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
   "ff" 'find-file
