@@ -167,8 +167,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (tsdh-dark)))
  '(inhibit-startup-screen t)
- '(org-agenda-files (quote ("~/Dropbox/Schedule")))
- '(org-agenda-regexp-filter (quote ("~/Dropbox/Schedule/*.org")) t)
+ '(org-agenda-files "~/.emacs.d/agenda-files")
+ '(org-agenda-regexp-filter (quote ("*.org")) t)
  '(org-agenda-start-on-weekday 0)
  '(org-todo-keywords (quote ((sequence "TODO" "STRT" "DONE"))))
  )
