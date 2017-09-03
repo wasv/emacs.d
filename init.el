@@ -147,17 +147,36 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (interactive)
   (pandoc-blank-to-blank "markdown" "latex" (concat buffer-file-name ".tex")))
 
+;;; C-Style
+(c-add-style "user"
+	     '("gnu"
+	       (c-indent-tabs-mode . t)
+	       (c-tab-always-indent . t)
+	       (c-indent-level . 4)
+	       (c-basic-offset . 4)
+	       (c-offsets-alist
+		(defun-block-intro . 4)
+		(substatement-open . 0)
+		(statement-block-intro . 4)
+		)))
+
 ;;; Hooks
 (add-hook 'after-init-hook 'global-flycheck-mode)
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 (add-hook 'text-mode-hook (lambda()
-			    (setq-default indent-tabs-mode nil)
-			    (setq-default tab-width 4)
-			    (setq indent-line-function 'insert-tab)))
+			    (setq-default indent-tabs-mode nil
+					  tab-width 4
+					  indent-line-function 'insert-tab)))
 (add-hook 'c-mode-common-hook
 	  (lambda()
-	    (require 'dtrt-indent)
-	    (dtrt-indent-mode t)))
+	    (c-set-style "user")
+	    (setq-default
+	          tab-width 4
+	          indent-tabs-mode t
+		  )
+	         (require 'dtrt-indent)
+		 (dtrt-indent-mode t)
+	    ))
 
 ;;; Autoconfig Stuff
 (custom-set-variables
