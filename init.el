@@ -69,6 +69,9 @@
   "wh" 'split-window-horizontally
   "ws" 'split-window-horizontally
   "wk" 'delete-window
+
+  "ot" 'org-timeline
+  "oa" 'org-agenda-list
   )
 
 ;;; Helm
