@@ -193,6 +193,12 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(org-agenda-regexp-filter (quote ("*.org")) t)
  '(org-agenda-start-on-weekday 0)
  '(org-todo-keywords (quote ((sequence "TODO" "STRT" "DONE"))))
+ '(safe-local-variable-values
+   (quote
+    ((eval flycheckmode 0)
+     )
+    )
+   )
  )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
