@@ -145,6 +145,14 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (interactive)
   (pandoc-blank-to-pdf "latex" (concat buffer-file-name ".pdf")))
 
+(defun rubber-tex-to-pdf ()
+  "Convert the current buffer from tex to a pdf using rubber."
+  (interactive)
+  (shell-command-on-region
+   (point-min) (point-max)
+   (format "rubber %s" buffer-file-name)
+   ))
+
 (defun pandoc-md-to-tex ()
   "Convert the current buffer from md to tex using Pandoc."
   (interactive)
