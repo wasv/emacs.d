@@ -153,6 +153,14 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
    (format "rubber %s" buffer-file-name)
    ))
 
+(defun pdflatex-tex-to-pdf ()
+  "Convert the current buffer from tex to pdf using pdflatex."
+  (interactive)
+  (shell-command-on-region
+   (point-min) (point-max)
+   (format "pdflatex %s && pdflatex %s" buffer-file-name buffer-file-name)
+   ))
+
 (defun pandoc-md-to-tex ()
   "Convert the current buffer from md to tex using Pandoc."
   (interactive)
@@ -189,6 +197,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 		 (dtrt-indent-mode t)
 	    ))
 
+
+(defvar visual-wrap-column 80)
 ;;; Autoconfig Stuff
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
