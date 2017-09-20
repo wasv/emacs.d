@@ -196,6 +196,13 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	         (require 'dtrt-indent)
 		 (dtrt-indent-mode t)
 	    ))
+(add-hook 'asm-mode-hook (lambda()
+                           (setq tab-always-indent
+                                 (default-value 'tab-always-indent))
+                           (setq tab-width 4)
+                           (setq indent-line-function 'insert-tab)
+                           (setq asm-indent-level 4)
+                           ))
 
 
 (defvar visual-wrap-column 80)
