@@ -72,6 +72,9 @@
 
   "ot" 'org-timeline
   "oa" 'org-agenda-list
+
+  "cw" 'whitespace-cleanup
+  "cf" 'fill-paragraph
   )
 
 ;;; Helm
