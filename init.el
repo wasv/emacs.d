@@ -203,6 +203,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
                            (setq tab-always-indent
                                  (default-value 'tab-always-indent))
                            (setq tab-width 4)
+			   (setq indent-tabs-mode nil)
                            (setq indent-line-function 'insert-tab)
                            (setq asm-indent-level 4)
                            ))
