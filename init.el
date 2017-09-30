@@ -153,7 +153,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (interactive)
   (shell-command-on-region
    (point-min) (point-max)
-   (format "rubber %s" buffer-file-name)
+   (format "rubber -d %s" buffer-file-name)
    ))
 
 (defun pdflatex-tex-to-pdf ()
