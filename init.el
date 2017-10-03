@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(setq-default major-mode 'text-mode)
+
 ;;; Disable menubar in console
 (when (not (display-graphic-p))
   (menu-bar-mode -1))
@@ -34,6 +36,7 @@
   markdown-mode
   python-mode
   racket-mode
+  matlab-mode
 
   org-bullets
 
@@ -202,9 +205,12 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (add-hook 'after-init-hook 'global-flycheck-mode)
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 (add-hook 'text-mode-hook (lambda()
-			    (setq-default indent-tabs-mode nil
-					  tab-width 4
-					  indent-line-function 'insert-tab)))
+			    (setq indent-tabs-mode nil
+				  tab-width 4
+				  indent-line-function 'insert-tab
+				  tab-always-indent
+                                    (default-value 'tab-always-indent))
+			    ))
 (add-hook 'c-mode-common-hook
 	  (lambda()
 	    (c-set-style "user")
@@ -221,7 +227,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
                            (setq tab-width 4)
 			   (setq indent-tabs-mode nil)
                            (setq indent-line-function 'insert-tab)
-                           (setq asm-indent-level 4)
                            ))
 
 
