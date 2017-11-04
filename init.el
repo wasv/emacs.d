@@ -182,6 +182,22 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 		(statement-block-intro . 4)
 		)))
 
+;;; Backup file settings
+(setq backup-directory-alist
+      `((".*" . ,"~/.emacs.d/backup/")))
+(setq auto-save-file-name-transforms
+      `((".*" ,"~/.emacs.d/backup/" t)))
+(message "Deleting old backup files...")
+(let ((week (* 60 60 24 7 2))
+      (current (float-time (current-time))))
+  (dolist (file (directory-files temporary-file-directory t))
+    (when (and (backup-file-name-p file)
+               (> (- current (float-time (fifth (file-attributes file))))
+                  week))
+      (message "%s" file)
+      (delete-file file))))
+
+
 ;;; Hooks
 (add-hook 'after-init-hook 'global-flycheck-mode)
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
@@ -222,13 +238,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(org-agenda-regexp-filter (quote ("*.org")) t)
  '(org-agenda-start-on-weekday 0)
  '(org-todo-keywords (quote ((sequence "TODO" "STRT" "DONE"))))
- '(safe-local-variable-values
-   (quote
-    ((eval flycheckmode 0)
-     )
-    )
-   )
- )
+ '(safe-local-variable-values (quote ((eval flycheckmode 0)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
