@@ -42,6 +42,7 @@
 
   evil-org
   evil-leader
+  evil-numbers
 
   dtrt-indent
   smart-tabs-mode
@@ -53,6 +54,7 @@
 (setq evil-want-C-i-jump nil)
 (require 'evil)
 (require 'evil-leader)
+(require 'evil-numbers)
 (evil-mode 1)
 (global-evil-leader-mode)
 (when evil-want-C-i-jump
@@ -66,6 +68,9 @@
   "bn" 'next-buffer
   "bp" 'previous-buffer
   "bk" 'kill-buffer
+
+  "ni" 'evil-numbers/inc-at-pt
+  "nd" 'evil-numbers/dec-at-pt
 
   "ww" 'evil-window-next
   "wv" 'split-window-vertically
