@@ -37,6 +37,7 @@
   python-mode
   racket-mode
   matlab-mode
+  lua-mode
 
   org-bullets
 
