@@ -4,6 +4,9 @@
 
 (setq-default major-mode 'text-mode)
 
+;;; Disable bleeping beep.
+(setq ring-bell-function 'ignore)
+
 ;;; Disable menubar in console
 (when (not (display-graphic-p))
   (menu-bar-mode -1))
@@ -249,6 +252,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  '(org-agenda-regexp-filter (quote ("*.org")) t)
  '(org-agenda-start-on-weekday 0)
  '(org-todo-keywords (quote ((sequence "TODO" "STRT" "DONE"))))
+ '(package-selected-packages
+   (quote
+    (csv-mode smart-tabs-mode dtrt-indent evil-numbers evil-leader evil-org org-bullets lua-mode matlab-mode racket-mode python-mode markdown-mode diff-hl auto-complete magit helm flycheck evil)))
  '(safe-local-variable-values (quote ((eval flycheckmode 0)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
