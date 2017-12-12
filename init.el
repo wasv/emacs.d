@@ -36,6 +36,9 @@
   auto-complete
   diff-hl
 
+  neotree
+  helm-projectile
+
   markdown-mode
   python-mode
   racket-mode
@@ -67,8 +70,10 @@
 (evil-leader/set-key
   "ff" 'find-file
   "fr" 'helm-recentf
+  "ft" 'neotree-toggle
+  "fp" 'projectile-switch-project
 
-  "bs" 'switch-to-buffer
+  "bs" 'helm-buffers-list
   "bn" 'next-buffer
   "bp" 'previous-buffer
   "bk" 'kill-buffer
@@ -89,9 +94,38 @@
   "cf" 'fill-paragraph
   )
 
+;;; NeoTree + Projectile
+(require 'neotree)
+(require 'projectile)
+(projectile-mode)
+(setq neo-smart-open t)
+
+(setq projectile-switch-project-action 'neotree-projectile-action)
+;(setq projectile-find-dir-hook 'neotree-project-dir)
+(setq projectile-enable-caching t)
+
+(defun neotree-project-dir ()
+  "Open NeoTree using the git root."
+  (interactive)
+  (let ((project-dir (projectile-project-root))
+	(file-name (buffer-file-name)))
+    (neotree-toggle)
+    (if project-dir
+	(if (neo-global--window-exists-p)
+	    (progn
+	      (neotree-dir project-dir)
+	      (neotree-find file-name)))
+      (message "Could not find git project root."))))
+
+(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-quick-look)
+(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+
 ;;; Helm
 (require 'helm-config)
 (global-set-key (kbd "M-x") 'helm-M-x)
+(require 'helm-projectile)
+(helm-projectile-on)
 
 ;;; Autocomplete
 (ac-config-default)
