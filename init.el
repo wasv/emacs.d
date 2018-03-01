@@ -22,8 +22,7 @@
   "Install given PACKAGE."
   (setq-default highlight-tabs t)
   (unless (package-installed-p package)
-    (unless (assoc package package-archive-contents)
-      (package-refresh-contents))
+    (package-refresh-contents)
     (package-install package)))
 
 ;;; Package List
