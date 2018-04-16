@@ -31,18 +31,17 @@
   evil
   flycheck
   helm
-  magit
-  auto-complete
-  diff-hl
+
+  company
+  company-irony
 
   neotree
   helm-projectile
 
   markdown-mode
   python-mode
-  racket-mode
   matlab-mode
-  lua-mode
+  csv-mode
 
   org-bullets
 
@@ -52,7 +51,6 @@
 
   dtrt-indent
   smart-tabs-mode
-  csv-mode
   ))
 
 ;;; evil
@@ -96,6 +94,7 @@
 ;;; NeoTree + Projectile
 (require 'neotree)
 (require 'projectile)
+
 (projectile-mode)
 (setq neo-smart-open t)
 
@@ -120,17 +119,23 @@
 (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
 (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
 
+
+;; company
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+
+(defun complete-or-indent ()
+  "Complete at point using company or indent."
+  (interactive)
+  (if (company-manual-begin)
+	  (company-complete-common)
+	(indent-according-to-mode)))
+
 ;;; Helm
 (require 'helm-config)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (require 'helm-projectile)
 (helm-projectile-on)
-
-;;; Autocomplete
-(ac-config-default)
-
-;;; diff-hl
-(diff-hl-mode 1)
 
 ;;; org
 (require 'org)
@@ -245,7 +250,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 ;;; Hooks
 (add-hook 'after-init-hook 'global-flycheck-mode)
-(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+(add-hook 'after-init-hook 'global-company-mode)
 (add-hook 'text-mode-hook (lambda()
 			    (setq indent-tabs-mode nil
 				  tab-width 4
