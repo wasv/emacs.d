@@ -11,6 +11,10 @@
 (when (not (display-graphic-p))
   (menu-bar-mode -1))
 
+;;; Wrap long lines
+(setq fill-column 78)
+(defvar visual-wrap-column 78)
+
 ;;; Packages
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
 			 ("org" . "http://orgmode.org/elpa/")
@@ -38,6 +42,8 @@
   neotree
   helm-projectile
 
+  rust-mode
+  flycheck-rust
   markdown-mode
   python-mode
   matlab-mode
@@ -51,7 +57,11 @@
 
   dtrt-indent
   smart-tabs-mode
+  exec-path-from-shell
   ))
+
+;;; Include custom PATH directories.
+(exec-path-from-shell-copy-env "PATH")
 
 ;;; evil
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-its-windows global-map)
@@ -89,6 +99,7 @@
 
   "cw" 'whitespace-cleanup
   "cf" 'fill-paragraph
+  "ci" 'indent-buffer
   )
 
 ;;; NeoTree + Projectile
@@ -120,7 +131,7 @@
 (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
 
 
-;; company
+;;; company
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
 
@@ -248,13 +259,19 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
       (delete-file file))))
 
 
+;;; Auto Indent Function
+(defun indent-buffer ()
+  "Indent current buffer according to major mode."
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
 ;;; Hooks
 (add-hook 'after-init-hook 'global-flycheck-mode)
 (add-hook 'after-init-hook 'global-company-mode)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook (lambda()
 			    (setq indent-tabs-mode nil
 				  tab-width 4
-				  indent-line-function 'insert-tab
 				  tab-always-indent
                                     (default-value 'tab-always-indent))
 			    ))
@@ -275,9 +292,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 			   (setq indent-tabs-mode nil)
                            (setq indent-line-function 'insert-tab)
                            ))
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
-
-(defvar visual-wrap-column 80)
 ;;; Autoconfig Stuff
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
