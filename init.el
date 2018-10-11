@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
+(set-frame-font "Source Code Pro-10" nil t)
 (setq-default major-mode 'text-mode)
 
 ;;; Disable bleeping beep.
@@ -46,6 +47,7 @@
   markdown-mode
   matlab-mode
   csv-mode
+  yaml-mode
 
   org-bullets
 
@@ -95,6 +97,7 @@
   "ot" 'org-timeline
   "oa" 'org-agenda-list
 
+  "cp" 'projectile-command-map
   "cw" 'whitespace-cleanup
   "cf" 'fill-paragraph
   "ci" 'indent-buffer
