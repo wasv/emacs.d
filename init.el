@@ -72,7 +72,7 @@
 (evil-mode 1)
 (global-evil-leader-mode)
 (when evil-want-C-i-jump
-      define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward)
+  define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward)
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
   "ff" 'find-file
@@ -110,8 +110,8 @@
 (projectile-mode)
 (setq neo-smart-open t)
 
+(setq projectile-project-run-cmd "make run")
 (setq projectile-switch-project-action 'neotree-projectile-action)
-;(setq projectile-find-dir-hook 'neotree-project-dir)
 (setq projectile-enable-caching t)
 
 (defun neotree-project-dir ()
@@ -140,8 +140,8 @@
   "Complete at point using company or indent."
   (interactive)
   (if (company-manual-begin)
-	  (company-complete-common)
-	(indent-according-to-mode)))
+      (company-complete-common)
+    (indent-according-to-mode)))
 
 ;;; Helm
 (require 'helm-config)
@@ -234,8 +234,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;;; C-Style
 (c-add-style "user"
 	     '("gnu"
-	       (c-indent-tabs-mode . t)
-	       (c-tab-always-indent . t)
+	       (c-indent-tabs-mode . nil)
 	       (c-indent-level . 4)
 	       (c-basic-offset . 4)
 	       (c-offsets-alist
@@ -280,11 +279,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 	  (lambda()
 	    (c-set-style "user")
 	    (setq-default
-	          tab-width 4
-	          indent-tabs-mode t
-		  )
-	         (require 'dtrt-indent)
-		 (dtrt-indent-mode t)
+	     tab-width 4
+	     indent-tabs-mode nil
+	     )
 	    ))
 (add-hook 'asm-mode-hook (lambda()
                            (setq tab-always-indent
