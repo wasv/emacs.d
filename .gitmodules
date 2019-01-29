@@ -1,0 +1,3 @@
+[submodule "rgbds-mode"]
+	path = rgbds-mode
+	url = https://github.com/japanoise/rgbds-mode

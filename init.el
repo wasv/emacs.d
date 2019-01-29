@@ -13,6 +13,7 @@
   (menu-bar-mode -1))
 
 ;;; Wrap long lines
+(column-number-mode)
 (setq fill-column 78)
 (defvar visual-wrap-column 78)
 
@@ -89,6 +90,7 @@
   "nd" 'evil-numbers/dec-at-pt
 
   "ww" 'evil-window-next
+  "w=" 'balance-windows
   "wv" 'split-window-vertically
   "wh" 'split-window-horizontally
   "ws" 'split-window-horizontally
@@ -215,7 +217,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (interactive)
   (shell-command-on-region
    (point-min) (point-max)
-   (format "rubber -d %s" buffer-file-name)
+   (format "rubber --pdf %s; rubber --pdf %s; rubber --clean %s"
+	   buffer-file-name buffer-file-name buffer-file-name)
    ))
 
 (defun pdflatex-tex-to-pdf ()
@@ -298,13 +301,12 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (tsdh-dark)))
  '(inhibit-startup-screen t)
  '(org-agenda-files "~/.emacs.d/agenda-files")
  '(org-agenda-regexp-filter (quote ("*.org")) t)
  '(org-agenda-start-on-weekday 0)
  '(org-todo-keywords (quote ((sequence "TODO" "STRT" "DONE"))))
- '(safe-local-variable-values (quote ((eval flycheckmode 0)))))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -312,5 +314,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  ;; If there is more than one, they won't work right.
  )
 
+(add-to-list 'load-path "~/.emacs.d/rgbds-mode/")
+(require 'rgbds-mode)
 (provide 'init)
 ;;; init.el ends here
