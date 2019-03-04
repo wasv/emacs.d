@@ -59,6 +59,8 @@
   dtrt-indent
   smart-tabs-mode
   exec-path-from-shell
+
+  mwim ; Dependency for rgbds-mode.
   ))
 
 ;;; Include custom PATH directories.
@@ -271,7 +273,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;;; Hooks
 (add-hook 'after-init-hook 'global-flycheck-mode)
 (add-hook 'after-init-hook 'global-company-mode)
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;(add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook (lambda()
 			    (setq indent-tabs-mode nil
 				  tab-width 4
@@ -301,6 +303,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(flycheck-ghdl-ieee-library "synopsys")
  '(inhibit-startup-screen t)
  '(org-agenda-files "~/.emacs.d/agenda-files")
  '(org-agenda-regexp-filter (quote ("*.org")) t)
