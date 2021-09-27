@@ -27,6 +27,9 @@
 ;; Configure package manager.
 (require 'use-package-config)
 
+;; Set theme
+(require 'theme-config)
+
 ;; Install basic plugins
 (use-package better-defaults)
 
@@ -42,4 +45,3 @@
 
 (use-package which-key)
 
-(require 'theme-config)
