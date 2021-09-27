@@ -1,4 +1,8 @@
+.#*
 /straight/
+/backups/
 auto-save-list
 places
 history
+ido.last
+smex-items

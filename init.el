@@ -5,6 +5,14 @@
                                 (convert-standard-filename "config/"))))
   (add-to-list 'load-path config-directory))
 
+;; Move all temp out of .emacs.d directory.
+(let ((backup-directory (concat user-emacs-directory
+                                (convert-standard-filename "backups/"))))
+  (setq auto-save-file-name-transforms `((".*" ,backup-directory t)))
+  (setq backup-directory-alist `((".*" . ,backup-directory)))
+  (setq auto-save-list-file-prefix backup-directory)
+  )
+
 ;; Configure package manager.
 (require 'use-package-config)
 
