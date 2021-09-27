@@ -16,6 +16,8 @@
   (setq auto-save-list-file-prefix backup-directory)
   )
 
+;; Disable home screen
+(setq inhibit-startup-screen t)
 
 ;; Wrap long lines
 (column-number-mode)
