@@ -5,6 +5,9 @@
                                 (convert-standard-filename "config/"))))
   (add-to-list 'load-path config-directory))
 
+;; Disable bell
+(setq ring-bell-function 'ignore)
+
 ;; Move all temp out of .emacs.d directory.
 (let ((backup-directory (concat user-emacs-directory
                                 (convert-standard-filename "backups/"))))
@@ -12,6 +15,12 @@
   (setq backup-directory-alist `((".*" . ,backup-directory)))
   (setq auto-save-list-file-prefix backup-directory)
   )
+
+
+;; Wrap long lines
+(column-number-mode)
+(setq fill-column 78)
+(defvar visual-wrap-column 78)
 
 ;; Configure package manager.
 (require 'use-package-config)
