@@ -41,3 +41,5 @@
           ("C-c C-c M-x" . execute-extended-command)))
 
 (use-package which-key)
+
+(require 'theme-config)
