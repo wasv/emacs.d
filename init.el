@@ -45,3 +45,13 @@
 
 (use-package which-key)
 
+(require 'git-config)
+
+;; Install common major modes.
+(use-package markdown-mode
+             :custom
+             (markdown-fontify-code-blocks-natively t)
+             )
+(use-package csv-mode)
+(use-package yaml-mode)
+(use-package json-mode)
