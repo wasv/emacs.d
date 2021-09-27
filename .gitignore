@@ -1,6 +1,7 @@
 .#*
 /straight/
 /backups/
+/transient/
 auto-save-list
 places
 history
