@@ -7,3 +7,11 @@
 
 ;; Configure package manager.
 (require 'use-package-config)
+
+;; Install basic plugins
+(use-package better-defaults)
+
+(use-package evil
+  :config
+  (require 'evil)
+  (evil-mode t))
