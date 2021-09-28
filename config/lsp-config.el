@@ -24,7 +24,20 @@
     (add-to-list 'lsp-disabled-clients 'pyls)
     (add-to-list 'lsp-enabled-clients 'jedi))
 
-;; optionally if you want to use debugger
+(use-package glsl-mode
+  :after lsp-mode
+  :init
+  (add-to-list 'lsp-language-id-configuration '(glsl-mode . "glsl"))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection '("glslls" "--verbose" "--stdin"))
+                    :activation-fn (lsp-activate-on "glsl")
+                    :server-id 'glslls))
+  )
+(use-package company-glsl
+  :after company
+  :init
+  (add-to-list 'company-backends 'company-glsl))
+
 (use-package dap-mode)
 
 (provide 'lsp-config)

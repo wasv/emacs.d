@@ -87,16 +87,3 @@
 (use-package csv-mode)
 (use-package yaml-mode)
 (use-package json-mode)
-(use-package glsl-mode
-  :after lsp-mode
-  :init
-  (add-to-list 'lsp-language-id-configuration '(glsl-mode . "glsl"))
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("glslls" "--verbose" "--stdin"))
-                    :activation-fn (lsp-activate-on "glsl")
-                    :server-id 'glslls))
-  )
-(use-package company-glsl
-  :after company
-  :init
-  (add-to-list 'company-backends 'company-glsl))
