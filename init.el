@@ -13,8 +13,7 @@
                                 (convert-standard-filename "backups/"))))
   (setq auto-save-file-name-transforms `((".*" ,backup-directory t)))
   (setq backup-directory-alist `((".*" . ,backup-directory)))
-  (setq auto-save-list-file-prefix backup-directory)
-  )
+  (setq auto-save-list-file-prefix backup-directory))
 
 ;; Disable home screen
 (setq inhibit-startup-screen t)
@@ -33,9 +32,28 @@
 ;; Install basic plugins
 (use-package better-defaults)
 
+(use-package recentf
+  :custom
+  (recentf-auto-cleanup 'never)
+  :init
+  (recentf-mode 1))
+
+(use-package ido
+  :init
+  (ido-mode t)
+  (ido-everywhere t))
+
+(use-package ido-completing-read+
+  :after ido
+  :init
+  (ido-ubiquitous-mode t))
+
+(use-package undo-fu)
+
 (use-package evil
-  :config
-  (require 'evil)
+  :custom
+  (evil-undo-system 'undo-fu)
+  :init
   (evil-mode t))
 
 (use-package smex
@@ -43,15 +61,42 @@
           ("M-X" . smex-major-mode-commands)
           ("C-c C-c M-x" . execute-extended-command)))
 
-(use-package which-key)
+(use-package which-key
+  :init
+  (which-key-mode))
 
+(use-package projectile
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("C-c p" . projectile-command-map))
+  :custom
+  (projectile-project-search-path '("~/Projects/"))
+  )
+(use-package company
+  :init
+  (global-company-mode))
+
+(require 'lsp-config)
 (require 'git-config)
 
 ;; Install common major modes.
 (use-package markdown-mode
-             :custom
-             (markdown-fontify-code-blocks-natively t)
-             )
+  :custom
+  (markdown-fontify-code-blocks-natively t))
 (use-package csv-mode)
 (use-package yaml-mode)
 (use-package json-mode)
+(use-package glsl-mode
+  :after lsp-mode
+  :init
+  (add-to-list 'lsp-language-id-configuration '(glsl-mode . "glsl"))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection '("glslls" "--verbose" "--stdin"))
+                    :activation-fn (lsp-activate-on "glsl")
+                    :server-id 'glslls))
+  )
+(use-package company-glsl
+  :after company
+  :init
+  (add-to-list 'company-backends 'company-glsl))
