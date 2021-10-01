@@ -14,6 +14,7 @@
   (setq auto-save-file-name-transforms `((".*" ,backup-directory t)))
   (setq backup-directory-alist `((".*" . ,backup-directory)))
   (setq auto-save-list-file-prefix backup-directory))
+(setq create-lockfiles nil)
 
 ;; Disable home screen
 (setq inhibit-startup-screen t)
