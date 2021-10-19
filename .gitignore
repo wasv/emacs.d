@@ -11,3 +11,5 @@ projectile-bookmarks.eld
 recentf
 .dap-breakpoints
 .lsp-session-v1
+/custom.el
+/tramp
