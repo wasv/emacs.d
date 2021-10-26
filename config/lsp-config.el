@@ -24,8 +24,7 @@
 (use-package lsp-jedi
   :after lsp-mode
   :init
-    (add-to-list 'lsp-disabled-clients 'pyls)
-    (add-to-list 'lsp-enabled-clients 'jedi))
+  (add-to-list 'lsp-disabled-clients 'pyls))
 
 (use-package glsl-mode
   :after lsp-mode
