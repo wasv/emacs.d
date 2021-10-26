@@ -2,9 +2,12 @@
 (use-package lsp-mode
   :hook ((python-mode . lsp-deferred)
          (c-mode-common . lsp-deferred)
+         (verilog-mode . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred)
-  :custom (lsp-keymap-prefix "C-c l"))
+  :custom
+  (lsp-keymap-prefix "C-c l")
+  (lsp-vhdl-server 'hdl-checker))
 
 ;; optionally
 (use-package lsp-ui
