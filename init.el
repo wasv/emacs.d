@@ -80,6 +80,7 @@
 
 (require 'lsp-config)
 (require 'git-config)
+(require 'web-config)
 
 ;; Install common major modes.
 (use-package markdown-mode
@@ -87,4 +88,3 @@
   (markdown-fontify-code-blocks-natively t))
 (use-package csv-mode)
 (use-package yaml-mode)
-(use-package json-mode)
