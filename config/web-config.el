@@ -29,3 +29,4 @@
   ))
 (use-package prettier-js)
 (use-package nvm)
+(provide 'web-config)
